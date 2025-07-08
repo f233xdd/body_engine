@@ -1,0 +1,15 @@
+[package]
+name = "engine"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+name = "engine"
+# crate-type = ["cdylib"]
+
+[dependencies]
+# pyo3 = { version = "*", features =  ["extension-module"] }
+
+[[test]]
+name = "two_body"
+path = "tests/two_body.rs"
