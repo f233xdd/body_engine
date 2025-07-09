@@ -1,4 +1,4 @@
-use super::planet::{Planet, interact};
+use super::{F, G, Planet};
 
 pub struct Engine<const D: usize, const N: usize> {
     planets: [Planet<D>; N],
@@ -25,4 +25,16 @@ impl<const D: usize, const N: usize> Engine<D, N> {
             p.flush_r(dt);
         }
     }
+}
+
+/// F = G * m1 * m2 / r ^ 2
+pub fn gravity<const D: usize>(p1: &mut Planet<D>, p2: &mut Planet<D>) -> F<D> {
+    let dr = p2.relative_r(p1);
+    &dr * (G * p1.m() * p2.m() / &dr.norm().powi(3))
+}
+
+pub fn interact<const D: usize>(p1: &mut Planet<D>, p2: &mut Planet<D>, dt: f64) {
+    let g = gravity(p1, p2);
+    p2.force(&g, dt);
+    p1.force(&(-g), dt);
 }

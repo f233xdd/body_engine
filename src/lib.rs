@@ -1,8 +1,10 @@
+mod consts;
 mod engine;
 mod macros;
 mod planet;
 mod vector;
 
-pub use engine::Engine;
-pub use planet::{G, Planet};
+pub use consts::{ACCURACY, F, G, R, V};
+pub use engine::{Engine, gravity};
+pub use planet::Planet;
 pub use vector::Vector;
