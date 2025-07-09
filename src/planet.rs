@@ -2,16 +2,32 @@ use std::fmt;
 
 use super::{F, R, V};
 
+static mut PLANETS: u8 = 0;
+
 #[derive(Clone)]
 pub struct Planet<const D: usize> {
     m: f64,
     r: R<D>,
     v: V<D>,
+    name: String,
 }
 
 impl<const D: usize> Planet<D> {
-    pub fn new(m: f64, r: R<D>, v: V<D>) -> Self {
-        Self { m, r, v }
+    pub fn new(m: f64, r: R<D>, v: V<D>, name: String) -> Self {
+        Self { m, r, v, name }
+    }
+    #[allow(static_mut_refs)]
+    pub fn new_by_default_name(m: f64, r: R<D>, v: V<D>) -> Self {
+        unsafe {
+            let p = Self {
+                m,
+                r,
+                v,
+                name: String::from(format!("Planet#{PLANETS}")),
+            };
+            PLANETS += 1;
+            p
+        }
     }
     pub fn m(&self) -> &f64 {
         &self.m
@@ -21,6 +37,9 @@ impl<const D: usize> Planet<D> {
     }
     pub fn v(&self) -> &V<D> {
         &self.v
+    }
+    pub fn name(&self) -> &str {
+        &self.name
     }
     pub fn force(&mut self, f: &F<D>, dt: f64) {
         self.v.add_to(&(f / *self.m() * dt));
@@ -44,6 +63,6 @@ impl<const D: usize> Planet<D> {
 
 impl<const D: usize> fmt::Display for Planet<D> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "r: {}, v: {}", self.r, self.v)
+        write!(f, "<{}|r: {}, v: {}>", self.name, self.r, self.v)
     }
 }

@@ -10,6 +10,10 @@ name = "engine"
 [dependencies]
 # pyo3 = { version = "*", features =  ["extension-module"] }
 
-[[test]]
+[[example]]
 name = "two_body"
-path = "tests/two_body.rs"
+path = "examples/two_body.rs"
+
+[[example]]
+name = "circle"
+path = "examples/circle.rs"

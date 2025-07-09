@@ -1,3 +1,5 @@
+use std::fmt;
+
 use super::{F, G, Planet};
 
 pub struct Engine<const D: usize, const N: usize> {
@@ -24,6 +26,15 @@ impl<const D: usize, const N: usize> Engine<D, N> {
         for p in self.planets.iter_mut() {
             p.flush_r(dt);
         }
+    }
+}
+
+impl<const D: usize, const N: usize> fmt::Display for Engine<D, N> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        for p in self.planets() {
+            writeln!(f, "{p}")?;
+        }
+        Ok(())
     }
 }
 
