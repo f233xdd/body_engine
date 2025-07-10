@@ -8,7 +8,7 @@ fn main() {
     ]);
     let mut total: f64 = 0.0;
     let mut i: i128 = 0;
-    println!("=====start sitmulating=====");
+    println!("=====STRAT SIMULATING=====");
 
     let start = time::Instant::now();
 

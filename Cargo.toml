@@ -17,3 +17,7 @@ path = "examples/two_body.rs"
 [[example]]
 name = "circle"
 path = "examples/circle.rs"
+
+[[test]]
+name = "test"
+path = "tests/test.rs"

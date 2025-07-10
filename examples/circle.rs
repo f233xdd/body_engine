@@ -1,6 +1,6 @@
 use engine::{Engine, Planet, vector};
 
-const dt: f64 = 1e-3;
+const T: f64 = 1e-3;
 
 fn main() {
     use std::time;
@@ -20,12 +20,12 @@ fn main() {
     ]);
     let mut t = 0.0;
     println!("{t}\n{eng}");
-    println!("=====STRAT STIMULATING=====");
+    println!("=====STRAT SIMULATING=====");
     let start = time::Instant::now();
     while t < 31557600.0 {
         // println!("{t}\n{eng}");
-        eng.flush(dt);
-        t += dt;
+        eng.flush(T);
+        t += T;
     }
     println!("duration: {}", start.elapsed().as_secs_f64());
     println!("{t}\n{eng}");
